@@ -1,0 +1,60 @@
+{
+    "city": {
+        "id": 1853908,
+        "name": "Osaka",
+        "coord": {
+            "lon": 137.266663,
+            "lat": 35.950001
+        },
+        "country": "JP",
+        "population": 0
+    },
+    "cod": "200",
+    "message": 0.0235,
+    "cnt": 2,
+    "list": [{
+        "dt": 1462586400,
+        "temp": {
+            "day": 293.27,
+            "min": 293.27,
+            "max": 297.9,
+            "night": 297.93,
+            "eve": 293.27,
+            "morn": 293.27
+        },
+        "pressure": 924.74,
+        "humidity": 99,
+        "weather": [{
+            "id": 501,
+            "main": "Rain",
+            "description": "moderate rain",
+            "icon": "10d"
+        }],
+        "speed": 0.97,
+        "deg": 150,
+        "clouds": 80,
+        "rain": 3.06
+    }, {
+        "dt": 1462672800,
+        "temp": {
+            "day": 297.93,
+            "min": 287.65,
+            "max": 297.93,
+            "night": 287.65,
+            "eve": 287.65,
+            "morn": 297.93
+        },
+        "pressure": 932.06,
+        "humidity": 31,
+        "weather": [{
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10d"
+        }],
+        "speed": 1.06,
+        "deg": 355,
+        "clouds": 32,
+        "rain": 1.62
+    }]
+}

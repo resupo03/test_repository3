@@ -1,35 +1,76 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+// module
+var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource']);
 
-myApp.config(function($routeProvider) {
-
+// config
+weatherApp.config(function ($routeProvider) {
     $routeProvider
 
-    .when('/', {
-        templateUrl: 'pages/main.html',
-        controller: 'mainController'
+        .when('/', {
+        templateUrl: 'pages/home.htm',
+        controller: 'homeController'
     })
 
-    .when('/second', {
-        templateUrl: 'pages/second.html',
-        controller: 'secondController'
+    .when('/forecast', {
+        templateUrl: 'pages/forecast.htm',
+        controller: 'forecastController'
     })
 
-    .when('/second/:num', {
-        templateUrl: 'pages/second.html',
-        controller: 'secondController'
-    })
+    .when('/forecast/:days', {
+        templateUrl: 'pages/forecast.htm',
+        controller: 'forecastController'
+    });
+
+})
+
+// service
+weatherApp.service('cityService', function () {
+
+    this.city = 'Osaka';
 
 });
 
+// controller
+weatherApp.controller('homeController', ['$scope', 'cityService', function ($scope, cityService) {
 
-myApp.controller('mainController', ['$scope', '$log', function ($scope, $log) {
+    $scope.city = cityService.city;
 
-    $scope.name = 'Main';
+    $scope.$watch('city', function (newVal) {
+
+        cityService.city = newVal;
+
+    });
 
 }]);
 
-myApp.controller('secondController', ['$scope', '$log', '$routeParams', function ($scope, $log, $routeParams) {
+weatherApp.controller('forecastController', ['$scope', '$resource', 'cityService', '$routeParams', function ($scope, $resource, cityService, $routeParams) {
 
-    $scope.num = $routeParams.num || 'hoge';
+    $scope.city = cityService.city;
+
+    $scope.days = $routeParams.days || '2';
+
+    //$scope.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast/daily", {
+    $scope.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast", {
+        callback: 'JSON_CALLBACK'
+    }, {
+        get: {
+            method: 'JSONP'
+        }
+    });
+
+    $scope.weatherResult = $scope.weatherAPI.get({
+        q: $scope.city,
+        cnt: $scope.days,
+        appid: 'c005a5e9f64a533bd6a782099d2174bc'
+    });
+
+    $scope.convertToCelcius = function (degK) {
+        return Math.round(degK - 273.15);
+    };
+
+    $scope.convertToDate = function (dt) {
+
+        return new Date(dt * 1000);
+
+    };
 
 }]);
