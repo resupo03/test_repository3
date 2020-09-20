@@ -7,15 +7,7 @@
 <div ng-repeat="w in weatherResult.list">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{ convertToDate(w.dt) | date: 'yyyy年M月d日' }}</h3>
-                </div>
-                <div class="panel-body">
-                    気温: {{ convertToCelcius(w.temp) }}<BR>
-                    気温: {{ convertToCelcius(w.temp.day) }}
-                </div>
-            </div>
+            <weather-report weather-day="w" convert-to-standard="convertToCelcius(dayTimeTemp)" convert-to-date="convertToDate(dt)" date-format="yyyy年M月d日"></weather-report>
         </div>
     </div>
 </div>
