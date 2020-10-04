@@ -1,6 +1,7 @@
 // service
 weatherApp.service('cityService', function () {
 
-    this.city = 'Osaka';
+    this.city = 'Tokyo';
+    //this.city = 'Osaka';
 
 });
